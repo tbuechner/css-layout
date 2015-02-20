@@ -1,0 +1,1 @@
+mvn install:install-file -Dfile=infer-annotations-1.4.jar -DgroupId=com.facebook.infer -DartifactId=annotation -Dversion=1.4.0 -Dpackaging=jar
