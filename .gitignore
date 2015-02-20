@@ -4,3 +4,6 @@ a.out
 /**/.idea/workspace.xml
 /lib/
 /node_modules/
+src/java/.classpath
+src/java/.project
+src/java/.settings/
