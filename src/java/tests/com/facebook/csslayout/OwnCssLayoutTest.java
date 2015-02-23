@@ -114,7 +114,7 @@ public class OwnCssLayoutTest {
 		node.setFlexDirection(CSSFlexDirection.COLUMN);
 		node.appendChild(createTimelineTop("timelineTop1"));
 		node.appendChild(createTimelineTop("timelineTop2"));
-		node.appendChild(createTimelineTop("timelineTop3"));
+		node.appendChild(createTimelineTopWithTimeEntities("timelineTop3", 20));
 		return node;
 	}
 
@@ -130,7 +130,22 @@ public class OwnCssLayoutTest {
         return node;
 	}
 
-	private CSSNode createTimelineBottomLeft() {
+    private CSSNode createTimelineTopWithTimeEntities(String name, int numberOfEntities) {
+        final CSSNode node = new CSSNode(name);
+        node.setFlex(1);
+        for (int i = 0; i < numberOfEntities; i++) {
+            node.appendChild(createTimeEntity());
+        }
+        return node;
+    }
+
+    private CSSNode createTimeEntity() {
+        final CSSNode node = new CSSNode("timeEntity");
+        node.setFlex(1);
+        return node;
+    }
+
+    private CSSNode createTimelineBottomLeft() {
 		final CSSNode node = new CSSNode("timelineBottomLeft");
         node.setStyleWidth(120);
         return node;
