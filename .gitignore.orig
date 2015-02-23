@@ -4,7 +4,10 @@ a.out
 /**/.idea/workspace.xml
 /lib/
 /node_modules/
-npm-debug.log
+<<<<<<< HEAD
 src/java/.classpath
 src/java/.project
 src/java/.settings/
+=======
+npm-debug.log
+>>>>>>> 0b892f71427a729c270f89cba8f8004fcbce0a3e
