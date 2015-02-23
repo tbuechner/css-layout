@@ -15,14 +15,13 @@ public class OwnCssLayoutTest {
 		slide.calculateLayout();
 
 		// assert
-		System.out.println(slide.toString());
+        System.out.println(NodeToString.toString(slide));
 	}
 
 	private CSSNode createSlide() {
 		final CSSNode node = new CSSNode("slide");
 		node.setStyleWidth(WIDTH).setStyleHeight(750);
-		node.setPadding(Spacing.ALL, 10);
-		node.setFlexDirection(CSSFlexDirection.COLUMN);
+        node.setFlexDirection(CSSFlexDirection.COLUMN);
 		node.setAlignItems(CSSAlign.STRETCH);
 		node.appendChild(createSlideContent());
 		return node;
@@ -46,7 +45,6 @@ public class OwnCssLayoutTest {
 		final CSSNode node = new CSSNode("header");
 		node.setFlexDirection(CSSFlexDirection.ROW);
         node.setStyleHeight(60);
-
 		node.appendChild(createHeaderLeftOrRight("headerLeft"));
 		node.appendChild(createHeaderCenter());
         node.appendChild(createHeaderLeftOrRight("headerRight"));
@@ -77,7 +75,7 @@ public class OwnCssLayoutTest {
 		final CSSNode node = new CSSNode("activities");
 		node.setFlexDirection(CSSFlexDirection.ROW);
 		node.setFlex(1);
-		node.appendChild(createCol1());
+        node.appendChild(createCol1());
 		node.appendChild(createCol2());
 		node.appendChild(createCol3());
 		return node;
