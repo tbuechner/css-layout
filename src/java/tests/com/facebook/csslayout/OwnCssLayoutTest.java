@@ -4,7 +4,9 @@ import org.junit.Test;
 
 public class OwnCssLayoutTest {
 
-	@Test
+    public static final float WIDTH = 1000;
+
+    @Test
 	public void layoutCalculation() throws Exception {
 		// arrange
 		final CSSNode slide = createSlide();
@@ -17,229 +19,159 @@ public class OwnCssLayoutTest {
 	}
 
 	private CSSNode createSlide() {
-		final CSSNode slide = new CSSNode("slide");
-		slide.setStyleWidth(800).setStyleHeight(600);
-		slide.setPadding(Spacing.ALL, 10);
-		slide.setFlexDirection(CSSFlexDirection.COLUMN);
-		slide.setAlignItems(CSSAlign.STRETCH);
-
-		slide.appendChild(createSlideContent());
-		return slide;
+		final CSSNode node = new CSSNode("slide");
+		node.setStyleWidth(WIDTH).setStyleHeight(750);
+		node.setPadding(Spacing.ALL, 10);
+		node.setFlexDirection(CSSFlexDirection.COLUMN);
+		node.setAlignItems(CSSAlign.STRETCH);
+		node.appendChild(createSlideContent());
+		return node;
 	}
 
 	private CSSNode createSlideContent() {
-		final CSSNode slideContent = new CSSNode("contentslide");
-		slideContent.setFlexDirection(CSSFlexDirection.COLUMN);
-		// flex: 1 0 0;
-		slideContent.setFlex(1);
+		final CSSNode node = new CSSNode("slidecontent");
+		node.setFlexDirection(CSSFlexDirection.COLUMN);
+		node.setFlex(1);
+        node.setPadding(Spacing.ALL, 10);
+        node.appendChild(createHeader());
+		node.appendChild(createTimelineTop());
+		node.appendChild(createActivities());
+		node.appendChild(createTimelineBottom());
+		node.appendChild(createFooter());
 
-		slideContent.appendChild(createHeader());
-		slideContent.appendChild(createTimelineTop());
-		slideContent.appendChild(createActivities());
-		slideContent.appendChild(createTimelineBottom());
-		slideContent.appendChild(createFooter());
-
-		return slideContent;
+		return node;
 	}
 
 	private CSSNode createHeader() {
-		final CSSNode header = new CSSNode("header");
-		header.setFlexDirection(CSSFlexDirection.ROW);
-		// flex: 0 0 60px;
-		// slide.setFlex(flex);
+		final CSSNode node = new CSSNode("header");
+		node.setFlexDirection(CSSFlexDirection.ROW);
+        node.setStyleHeight(60);
 
-		header.appendChild(createHeaderLeft());
-		header.appendChild(createHeaderCenter());
-		header.appendChild(createHeaderRight());
-		return header;
+		node.appendChild(createHeaderLeftOrRight("headerLeft"));
+		node.appendChild(createHeaderCenter());
+        node.appendChild(createHeaderLeftOrRight("headerRight"));
+		return node;
 	}
 
 	private CSSNode createTimelineTop() {
-		final CSSNode header = new CSSNode("timelineTop");
-		header.setFlexDirection(CSSFlexDirection.ROW);
-		// flex: 0 0 75px;
-		// slide.setFlex(flex);
-
-		header.appendChild(createTimelineTopLeft());
-		header.appendChild(createTimelineTopCenter());
-		header.appendChild(createTimelineTopRight());
-		return header;
+		final CSSNode node = new CSSNode("timelineTop");
+		node.setFlexDirection(CSSFlexDirection.ROW);
+		node.setStyleHeight(75);
+		node.appendChild(createTimelineTopLeft());
+		node.appendChild(createTimelineTopCenter());
+		node.appendChild(createTimelineTopRight());
+		return node;
 	}
 
 	private CSSNode createTimelineBottom() {
-		final CSSNode header = new CSSNode("timelineBottom");
-		header.setFlexDirection(CSSFlexDirection.ROW);
-		// flex: 0 0 25px;
-		// slide.setFlex(flex);
-
-		header.appendChild(createTimelineBottomLeft());
-		header.appendChild(createTimelineBottomCenter());
-		header.appendChild(createTimelineBottomRight());
-		return header;
+		final CSSNode node = new CSSNode("timelineBottom");
+		node.setFlexDirection(CSSFlexDirection.ROW);
+        node.setStyleHeight(25);
+		node.appendChild(createTimelineBottomLeft());
+		node.appendChild(createTimelineBottomCenter());
+		node.appendChild(createTimelineBottomRight());
+		return node;
 	}
 
 	private CSSNode createActivities() {
-		final CSSNode activities = new CSSNode("activities");
-		activities.setFlexDirection(CSSFlexDirection.ROW);
-		// flex: 1 0 0;
-		// slide.setFlex(flex);
-
-		activities.appendChild(createCol1());
-		activities.appendChild(createCol2());
-		activities.appendChild(createCol3());
-		return activities;
+		final CSSNode node = new CSSNode("activities");
+		node.setFlexDirection(CSSFlexDirection.ROW);
+		node.setFlex(1);
+		node.appendChild(createCol1());
+		node.appendChild(createCol2());
+		node.appendChild(createCol3());
+		return node;
 	}
 
 	private CSSNode createFooter() {
-		final CSSNode footer = new CSSNode("footer");
-		footer.setFlexDirection(CSSFlexDirection.ROW);
-		// flex: 0 0 20px;
-		// footer.setFlex(flex);
-
-		footer.appendChild(createFooterLeft());
-		footer.appendChild(createFooterCenter());
-		footer.appendChild(createFooterRight());
-		return footer;
+		final CSSNode node = new CSSNode("footer");
+		node.setFlexDirection(CSSFlexDirection.ROW);
+        node.setStyleHeight(60);
+        node.appendChild(createHeaderLeftOrRight("footerLeft"));
+		node.appendChild(createHeaderCenter());
+        node.appendChild(createHeaderLeftOrRight("footerRight"));
+		return node;
 	}
 
-	private CSSNode createHeaderLeft() {
-		final CSSNode headerLeft = new CSSNode("headerleft");
-		// XXX flex: 0 0 15%;
-		headerLeft.setFlex(0.15f);
-		return headerLeft;
+	private CSSNode createHeaderLeftOrRight(String name) {
+		final CSSNode node = new CSSNode(name);
+        node.setStyleWidth(WIDTH * 0.15f);
+		return node;
 	}
 
 	private CSSNode createHeaderCenter() {
-		final CSSNode headerCenter = new CSSNode("headercenter");
-		// XXX flex: 1 0 0;
-		headerCenter.setFlex(0f);
-		return headerCenter;
-	}
-
-	private CSSNode createHeaderRight() {
-		final CSSNode headerRight = new CSSNode("headerright");
-		// XXX flex: 0 0 15%;
-		headerRight.setFlex(0.15f);
-		return headerRight;
+		final CSSNode node = new CSSNode("headerCenter");
+		node.setFlex(1);
+		return node;
 	}
 
 	private CSSNode createTimelineTopLeft() {
-		final CSSNode timelineTopLeft = new CSSNode("timelineTopLeft");
-		// XXX flex: 0 0 180px;
-		// headerLeft.setFlex();
-		return timelineTopLeft;
+		final CSSNode node = new CSSNode("timelineTopLeft");
+        node.setStyleWidth(180);
+        return node;
 	}
 
 	private CSSNode createTimelineTopCenter() {
-		final CSSNode timelineTopCenter = new CSSNode("timelineTopCenter");
-		timelineTopCenter.setFlexDirection(CSSFlexDirection.COLUMN);
-		// XXX flex: 1 0 0;
-		// headerLeft.setFlex();
-
-		timelineTopCenter.appendChild(createTimelineTop1());
-		timelineTopCenter.appendChild(createTimelineTop2());
-		timelineTopCenter.appendChild(createTimelineTop3());
-		return timelineTopCenter;
+		final CSSNode node = new CSSNode("timelineTopCenter");
+		node.setFlexDirection(CSSFlexDirection.COLUMN);
+		node.appendChild(createTimelineTop("timelineTop1"));
+		node.appendChild(createTimelineTop("timelineTop2"));
+		node.appendChild(createTimelineTop("timelineTop3"));
+		return node;
 	}
 
 	private CSSNode createTimelineTopRight() {
-		final CSSNode timelineTopRight = new CSSNode("timelineTopRight");
-		// XXX flex: 0 0 120px;
-		// headerLeft.setFlex();
-		return timelineTopRight;
+		final CSSNode node = new CSSNode("timelineTopRight");
+        node.setStyleWidth(120);
+        return node;
 	}
 
-	private CSSNode createTimelineTop1() {
-		final CSSNode timelineTop1 = new CSSNode("timelineTop1");
-		// XXX flex: 1 0 0;
-		// timelineTop1.setFlex();
-		return timelineTop1;
-	}
-
-	private CSSNode createTimelineTop2() {
-		final CSSNode timelineTop2 = new CSSNode("timelineTop2");
-		// XXX flex: 1 0 0;
-		// timelineTop2.setFlex();
-		return timelineTop2;
-	}
-
-	private CSSNode createTimelineTop3() {
-		final CSSNode timelineTop3 = new CSSNode("timelineTop3");
-		// XXX flex: 1 0 0;
-		// timelineTop3.setFlex();
-		return timelineTop3;
+	private CSSNode createTimelineTop(String name) {
+		final CSSNode node = new CSSNode(name);
+        node.setFlex(1);
+        return node;
 	}
 
 	private CSSNode createTimelineBottomLeft() {
-		final CSSNode timelineBottomLeft = new CSSNode("timelineBottomLeft");
-		// XXX flex: 0 0 180px;
-		// headerLeft.setFlex();
-		return timelineBottomLeft;
+		final CSSNode node = new CSSNode("timelineBottomLeft");
+        node.setStyleWidth(120);
+        return node;
 	}
 
 	private CSSNode createTimelineBottomCenter() {
-		final CSSNode timelineBottomCenter = new CSSNode("timelineBottomCenter");
-		timelineBottomCenter.setFlexDirection(CSSFlexDirection.COLUMN);
-		// XXX flex: 1 0 0;
-		// headerLeft.setFlex();
-
-		timelineBottomCenter.appendChild(createTimelineBottom1());
-		return timelineBottomCenter;
+		final CSSNode node = new CSSNode("timelineBottomCenter");
+		node.setFlexDirection(CSSFlexDirection.COLUMN);
+		node.appendChild(createTimelineBottom1());
+		return node;
 	}
 
 	private CSSNode createTimelineBottomRight() {
-		final CSSNode timelineBottomRight = new CSSNode("timelineBottomRight");
-		// XXX flex: 0 0 120px;
-		// headerLeft.setFlex();
-		return timelineBottomRight;
+		final CSSNode node = new CSSNode("timelineBottomRight");
+        node.setStyleWidth(120);
+        return node;
 	}
 
 	private CSSNode createTimelineBottom1() {
-		final CSSNode timelineBotom1 = new CSSNode("timelineBotom1");
-		// XXX flex: 1 0 0;
-		// timelineTop1.setFlex();
-		return timelineBotom1;
-	}
-
-	private CSSNode createFooterLeft() {
-		final CSSNode footerLeft = new CSSNode("footerLeft");
-		// XXX flex: 0 0 15%;
-		footerLeft.setFlex(0.15f);
-		return footerLeft;
-	}
-
-	private CSSNode createFooterCenter() {
-		final CSSNode footerCenter = new CSSNode("footerCenter");
-		// XXX flex: 1 0 0;
-		footerCenter.setFlex(0f);
-		return footerCenter;
-	}
-
-	private CSSNode createFooterRight() {
-		final CSSNode footerRight = new CSSNode("footerRight");
-		// XXX flex: 0 0 15%;
-		footerRight.setFlex(0.15f);
-		return footerRight;
+		final CSSNode node = new CSSNode("timelineBotom1");
+        node.setFlex(1);
+        return node;
 	}
 
 	private CSSNode createCol1() {
-		final CSSNode col1 = new CSSNode("col1");
-		// XXX flex: 0 0 180px;
-		// col1.setFlex();
-		return col1;
+		final CSSNode node = new CSSNode("col1");
+        node.setStyleWidth(180);
+        return node;
 	}
 
 	private CSSNode createCol2() {
-		final CSSNode col2 = new CSSNode("col2");
-		// XXX flex: 1 0 0;
-		// col2.setFlex();
-		return col2;
+		final CSSNode node = new CSSNode("col2");
+        node.setFlex(1);
+        return node;
 	}
 
 	private CSSNode createCol3() {
-		final CSSNode col3 = new CSSNode("col3");
-		// XXX flex: 0 0 120px;
-		// col3.setFlex();
-		return col3;
+		final CSSNode node = new CSSNode("col3");
+        node.setStyleWidth(120);
+		return node;
 	}
 }

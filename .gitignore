@@ -2,6 +2,7 @@ a.out
 *.class
 /**/java/out/*
 /**/.idea/workspace.xml
+/**/.idea/libraries
 /lib/
 /node_modules/
 npm-debug.log

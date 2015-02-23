@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/css-layout.iml" filepath="$PROJECT_DIR$/css-layout.iml" />
+      <module fileurl="file://$PROJECT_DIR$/src/java/csslayout.iml" filepath="$PROJECT_DIR$/src/java/csslayout.iml" />
     </modules>
   </component>
 </project>
